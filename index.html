@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vinay Singh | Senior SRE</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root,
+    [data-theme="light"] {
+      --bg:             #ffffff;
+      --bg-secondary:   #f5f5f7;
+      --bg-card:        #fbfbfd;
+      --text:           #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary:  #a1a1a6;
+      --accent:         #0071e3;
+      --accent-hover:   #0077ed;
+      --border:         rgba(0, 0, 0, 0.08);
+      --shadow-sm:      0 2px 12px rgba(0,0,0,0.06);
+      --shadow-md:      0 8px 32px rgba(0,0,0,0.08);
+      --shadow-lg:      0 20px 60px rgba(0,0,0,0.10);
+      --nav-bg:         rgba(255, 255, 255, 0.72);
+      --stats-bg:       #1d1d1f;
+      --hero-gradient:  linear-gradient(180deg, #fbfbfd 0%, #ffffff 100%);
+      --hero-radial:    rgba(0, 113, 227, 0.06);
+      --toggle-bg:      #e5e5ea;
+      --toggle-icon:    #1d1d1f;
+      --radius:         18px;
+      --radius-sm:      12px;
+    }
+
+    [data-theme="dark"] {
+      --bg:             #000000;
+      --bg-secondary:   #1c1c1e;
+      --bg-card:        #2c2c2e;
+      --text:           #f5f5f7;
+      --text-secondary: #98989d;
+      --text-tertiary:  #636366;
+      --accent:         #2997ff;
+      --accent-hover:   #47a8ff;
+      --border:         rgba(255, 255, 255, 0.08);
+      --shadow-sm:      0 2px 12px rgba(0,0,0,0.3);
+      --shadow-md:      0 8px 32px rgba(0,0,0,0.4);
+      --shadow-lg:      0 20px 60px rgba(0,0,0,0.5);
+      --nav-bg:         rgba(0, 0, 0, 0.72);
+      --stats-bg:       #1c1c1e;
+      --hero-gradient:  linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+      --hero-radial:    rgba(41, 151, 255, 0.07);
+      --toggle-bg:      #3a3a3c;
+      --toggle-icon:    #f5f5f7;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+                   'SF Pro Text', 'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    a { text-decoration: none; }
+
+    /* ─── Theme Toggle ─── */
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--toggle-bg);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease, transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle:hover { transform: scale(1.1); }
+
+    .theme-toggle svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--toggle-icon);
+      transition: fill 0.3s ease;
+    }
+
+    .icon-sun  { display: none; }
+    .icon-moon { display: block; }
+    [data-theme="dark"] .icon-sun  { display: block; }
+    [data-theme="dark"] .icon-moon { display: none; }
+
+    /* ─── Nav ─── */
+    nav {
+      position: fixed;
+      top: 0; width: 100%;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 0.5px solid var(--border);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      transition: color 0.4s;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-center a {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-center a:hover { color: var(--text); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-cta {
+      background: var(--accent);
+      color: white !important;
+      padding: 0.4rem 1rem;
+      border-radius: 980px;
+      font-size: 0.8rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-hover);
+      transform: scale(1.02);
+    }
+
+    /* ─── Hero ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 2rem 4rem;
+      background: var(--hero-gradient);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s ease;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, var(--hero-radial) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.35s forwards;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--text-secondary);
+      margin-top: 1rem;
+      max-width: 640px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-tertiary);
+      max-width: 520px;
+      margin-top: 1.2rem;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.65s forwards;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.8rem;
+      border-radius: 980px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-filled { background: var(--accent); color: white; }
+    .btn-filled:hover {
+      background: var(--accent-hover);
+      transform: scale(1.02);
+      box-shadow: 0 4px 20px rgba(0, 113, 227, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1.5px solid rgba(0, 113, 227, 0.35);
+    }
+
+    [data-theme="dark"] .btn-outline { border-color: rgba(41, 151, 255, 0.35); }
+
+    .btn-outline:hover {
+      background: rgba(0, 113, 227, 0.05);
+      border-color: var(--accent);
+      transform: scale(1.02);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      animation: fadeIn 1s 1.2s forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 0.7rem;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--text-tertiary), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* ─── Sections ─── */
+    .section-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      transition: color 0.4s;
+    }
+
+    .section-heading {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      transition: color 0.4s;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 3.5rem;
+      transition: color 0.4s;
+    }
+
+    /* ─── About (grey) ─── */
+    #about { background: var(--bg-secondary); transition: background 0.4s; }
+
+    .about-grid {
+	  display: block;
+	  max-width: 100%;
+	}
+
+    .about-text p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      transition: color 0.4s;
+      text-align: justify;
+    }
+
+    .about-text p strong { color: var(--text); font-weight: 600; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .skill-chip {
+      background: var(--bg);              /* white card on grey section */
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      transition: all 0.2s, background 0.4s, border-color 0.4s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .skill-chip:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+      color: var(--text);
+    }
+
+    .skill-chip .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: background 0.4s;
+    }
+
+    .about-visual { display: flex; justify-content: center; }
+
+    .profile-card {
+      background: var(--bg);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      width: 100%; max-width: 340px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+    }
+
+    .profile-avatar {
+      width: 100px; height: 100px;
+      background: linear-gradient(135deg, #0071e3, #42a5f5);
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 113, 227, 0.2);
+    }
+
+    .profile-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      transition: color 0.4s;
+    }
+
+    .profile-title {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      margin-top: 0.3rem;
+      margin-bottom: 1.5rem;
+      transition: color 0.4s;
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      transition: border-color 0.4s;
+    }
+
+    .stat-num {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      transition: color 0.4s;
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      color: var(--text-tertiary);
+      margin-top: 0.2rem;
+      line-height: 1.3;
+      transition: color 0.4s;
+    }
+
+    /* ─── Experience (white) ─── */
+    #experience { background: var(--bg); transition: background 0.4s; }
+
+    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .exp-card {
+      background: var(--bg-card);         /* slightly off-white card on white section */
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      transition: all 0.3s ease, background 0.4s, border-color 0.4s;
+      cursor: default;
+    }
+
+    .exp-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+      border-color: rgba(0, 113, 227, 0.15);
+    }
+
+    .exp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .exp-badge {
+      display: inline-block;
+      background: rgba(0, 113, 227, 0.08);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 980px;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.5rem;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    [data-theme="dark"] .exp-badge { background: rgba(41, 151, 255, 0.1); }
+
+    .exp-role {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      transition: color 0.4s;
+    }
+
+    .exp-company {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-top: 0.2rem;
+      font-weight: 500;
+    }
+
+    .exp-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.2rem;
+    }
+
+    .exp-date {
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      font-weight: 500;
+      transition: color 0.4s;
+    }
+
+    .exp-location {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      transition: color 0.4s;
+    }
+
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .exp-bullets li {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.6;
+      transition: color 0.4s;
+    }
+
+    .exp-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.55em;
+      width: 5px; height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      transition: background 0.4s;
+    }
+
+    /* ─── Projects (grey) ─── */
+    #projects { background: var(--bg-secondary); transition: background 0.4s; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg);              /* white card on grey section */
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: all 0.3s ease, background 0.4s, border-color 0.4s;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .project-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: rgba(0, 113, 227, 0.12);
+    }
+
+    .project-icon-wrap {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, #f0f7ff, #e0f0ff);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: background 0.4s;
+    }
+
+    [data-theme="dark"] .project-icon-wrap { background: linear-gradient(135deg, #1a2a3a, #0d1f33); }
+
+    .project-name {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      transition: color 0.4s;
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      flex: 1;
+      transition: color 0.4s;
+      text-align: justify;
+    }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: rgba(0, 113, 227, 0.07);
+      padding: 0.25rem 0.65rem;
+      border-radius: 980px;
+      transition: color 0.4s, background 0.4s;
+    }
+
+    [data-theme="dark"] .tag { background: rgba(41, 151, 255, 0.1); }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      transition: border-color 0.4s;
+    }
+
+    .project-link {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: gap 0.2s, color 0.4s;
+    }
+
+    .project-link:hover { gap: 0.5rem; }
+
+    /* ─── Stats Banner (dark) ─── */
+    #stats { background: var(--stats-bg); transition: background 0.4s; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .stat-block {
+      padding: 3.5rem 2rem;
+      text-align: center;
+      background: var(--stats-bg);
+      transition: background 0.4s;
+    }
+
+    .stat-block-num {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: white;
+    }
+
+    [data-theme="dark"] .stat-block-num { color: var(--text); }
+
+    .stat-block-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.5rem;
+    }
+
+    [data-theme="dark"] .stat-block-label { color: var(--text-tertiary); }
+
+    /* ─── Certifications (white) ─── */
+    #certifications { background: var(--bg); transition: background 0.4s; }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .cert-card {
+      background: var(--bg-card);         /* off-white card on white section */
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: all 0.3s ease, background 0.4s, border-color 0.4s;
+    }
+
+    .cert-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+      border-color: rgba(0, 113, 227, 0.15);
+    }
+
+    .cert-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, #f0f7ff, #e0f0ff);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      transition: background 0.4s;
+    }
+
+    [data-theme="dark"] .cert-icon { background: linear-gradient(135deg, #1a2a3a, #0d1f33); }
+
+    .cert-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      transition: color 0.4s;
+    }
+
+    .cert-issuer {
+      font-size: 0.76rem;
+      color: var(--text-tertiary);
+      margin-top: 0.3rem;
+      transition: color 0.4s;
+    }
+
+    /* ─── Contact (grey) ─── */
+    #contact { background: var(--bg-secondary); transition: background 0.4s; }
+
+    .contact-card {
+      background: var(--bg);              /* white card on grey section */
+      border-radius: 28px;
+      padding: 5rem 4rem;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      transition: background 0.4s, border-color 0.4s;
+    }
+
+    .contact-heading {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 1rem;
+      transition: color 0.4s;
+    }
+
+    .contact-desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      transition: color 0.4s;
+    }
+
+    .contact-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── Footer ─── */
+    footer {
+      background: var(--bg-secondary);
+      border-top: 0.5px solid var(--border);
+      padding: 2rem;
+      transition: background 0.4s, border-color 0.4s;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy { font-size: 0.78rem; color: var(--text-tertiary); transition: color 0.4s; }
+
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+
+    .footer-links a {
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ─── Animations ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50%       { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .about-grid   { grid-template-columns: 1fr; gap: 3rem; }
+      .stats-grid   { grid-template-columns: repeat(2, 1fr); }
+      .nav-center   { display: none; }
+      .section-wrap { padding: 5rem 1.5rem; }
+      .contact-card { padding: 3rem 1.5rem; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .exp-meta     { align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Vinay Singh</div>
+      <ul class="nav-center">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="mailto:vinayjhansi@gmail.com" class="nav-cta">Contact</a>
+        <!-- Photo -->
+	  	<a href="#about">
+			<img src="Vinay Singh.jpg" style="
+			  width: 35px;
+			  height: 35px;
+			  border-radius: 50%;
+			  object-fit: cover;
+			  border: 1.5px solid rgba(0, 113, 227, 0.3);
+			  display: block;
+			  transition: border-color 0.2s, transform 0.2s;
+			"
+			onmouseover="this.style.borderColor='var(--accent)'; this.style.transform='scale(1.1)'"
+			onmouseout="this.style.borderColor='rgba(0,113,227,0.3)'; this.style.transform='scale(1)'"
+			/>
+	  	</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1"  x2="12" y2="3"  stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4.22" y1="4.22"   x2="5.64" y2="5.64"   stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="1"  y1="12" x2="3"  y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"   stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"   stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section id="hero">
+    <p class="hero-eyebrow">Senior Site Reliability Engineer</p>
+    <h1 class="hero-name">Vinay Singh</h1>
+    <p class="hero-tagline" style="white-space: nowrap;">SRE by craft. Python by choice. Apple by tenure.</p>
+    <p class="hero-desc">
+      15+ years designing, scaling, and operating highly available cloud and distributed
+      systems at Apple. Based in Sunnyvale, California.
+    </p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-filled">View My Work</a>
+      <a href="resume.pdf" class="btn btn-outline" target="_blank">Download Resume</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ─── STATS BANNER ─── -->
+  <div id="stats">
+    <div class="stats-grid">
+      <div class="stat-block reveal">
+        <div class="stat-block-num">15+</div>
+        <div class="stat-block-label">Years of Experience</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-block-num">60%</div>
+        <div class="stat-block-label">MTTR Reduction via Python Automation</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-block-num">70%</div>
+        <div class="stat-block-label">Toil Eliminated</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-block-num">10+</div>
+        <div class="stat-block-label">Tools Designed, Built & Owned</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ABOUT (grey) ─── -->
+  <section id="about">
+    <div class="section-wrap">
+      <div class="about-grid">
+        <div>
+          <p class="section-eyebrow reveal">About</p>
+          <h2 class="section-heading reveal">Reliability and operational excellence.</h2>
+          <div class="about-text reveal">
+            <p>
+              I'm a <strong>Senior Site Reliability Engineer</strong> with 15+ years of experience
+              designing, scaling, and operating highly available cloud and distributed systems
+              at <strong>Apple</strong>. I specialize in Kubernetes, Terraform, Python automation,
+              and observability.
+            </p>
+            <p>
+              My focus is on reducing toil, improving observability, building
+              resilient CI/CD pipelines, and driving proactive reliability engineering through
+              smart monitoring and incident automation.
+            </p>
+          </div>
+          <div class="skills-grid reveal">
+            <div class="skill-chip"><span class="dot"></span>Python | Java | Swift</div>
+            <div class="skill-chip"><span class="dot"></span>Relation Databases</div>
+            <div class="skill-chip"><span class="dot"></span>Shell Scripting</div>
+            <div class="skill-chip"><span class="dot"></span>AWS</div>
+            <div class="skill-chip"><span class="dot"></span>Docker | Kubernetes</div>
+            <div class="skill-chip"><span class="dot"></span>Terraform | Ansible</div>
+            <div class="skill-chip"><span class="dot"></span>Rio | Jenkins | GitHub CI</div>
+            <div class="skill-chip"><span class="dot"></span>Splunk</div>
+            <div class="skill-chip"><span class="dot"></span>Prometheus | Grafana</div>
+            <div class="skill-chip"><span class="dot"></span>Nginx | Load Balancer</div>
+            <div class="skill-chip"><span class="dot"></span>Linux (RHEL) | macOS</div>
+            <div class="skill-chip"><span class="dot"></span>REST APIs | Microservices</div>
+            <div class="skill-chip"><span class="dot"></span>System Design</div>
+            <div class="skill-chip"><span class="dot"></span>Incident Management</div>
+            <div class="skill-chip"><span class="dot"></span>On-Call</div>
+            <div class="skill-chip"><span class="dot"></span>Disaster Recovery</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EXPERIENCE (white) ─── -->
+  <section id="experience">
+    <div class="section-wrap">
+      <p class="section-eyebrow reveal">Experience</p>
+      <h2 class="section-heading reveal">Where I've worked.</h2>
+      <p class="section-sub reveal" style="white-space: nowrap;">15+ years at Apple across three progressive roles, growing from Programmer Analyst to Senior SRE.</p>
+
+      <div class="exp-list">
+
+        <div class="exp-card reveal">
+          <div class="exp-top">
+            <div>
+              <div class="exp-badge">Current Role</div>
+              <div class="exp-role">Senior Site Reliability Engineer</div>
+              <div class="exp-company">Apple Inc. (via Tata Consultancy Services)</div>
+            </div>
+            <div class="exp-meta">
+              <div class="exp-date">May 2021 &mdash; Present</div>
+              <div class="exp-location">Sunnyvale, CA</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Reduced MTTR by 60% through automation, monitoring improvements, and process optimization via in-depth root cause analysis.</li>
+            <li>Designed Splunk dashboards and alert strategies resulting in a 70% reduction in incoming support tickets by proactively detecting failures.</li>
+            <li>Designed and developed AutoPilot — a Flask-based job orchestration platform with REST APIs to centrally manage batch workflows, eliminating third-party dependency (100% in-house).</li>
+            <li>Developed PatchIT — a Python and Ansible automation solution reducing manual workload by 60% for kernel upgrade and application maintenance tasks.</li>
+            <li>Reduced operational toil by 70% through Python and Shell automation tools, improving developer and support team productivity.</li>
+            <li>Architected and maintained CI/CD pipelines using Jenkins enabling reliable, repeatable, scalable deployments across distributed teams.</li>
+            <li>Leveraged GenAI tools including Claude Code to boost personal productivity by 70%.</li>
+            <li>Hands-on experience with firewall rules, port exposure, ingress/egress traffic, and TCP/IP debugging in Linux environments.</li>
+          </ul>
+        </div>
+
+        <div class="exp-card reveal">
+          <div class="exp-top">
+            <div>
+              <div class="exp-badge">Previous Role</div>
+              <div class="exp-role">Technical Lead</div>
+              <div class="exp-company">Apple Inc. (via Quest Global)</div>
+            </div>
+            <div class="exp-meta">
+              <div class="exp-date">Oct 2014 &mdash; May 2021</div>
+              <div class="exp-location">Sunnyvale, CA</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Led end-to-end system design, architecture, and production delivery of scalable, highly available enterprise applications.</li>
+            <li>Prototyped and implemented AWS S3 integrations using AWS S3 SDK and s3curl for scalable cloud storage solutions.</li>
+            <li>Implemented secure communication mechanisms including mTLS prototyping and certificate lifecycle management.</li>
+            <li>Built automated GUI test frameworks and REST API sanity suites, improving release confidence and reducing production defects.</li>
+            <li>Performed memory profiling and performance tuning improving application efficiency and reducing resource consumption.</li>
+            <li>Mentored junior engineers and enforced best practices through peer code reviews.</li>
+          </ul>
+        </div>
+
+        <div class="exp-card reveal">
+          <div class="exp-top">
+            <div>
+              <div class="exp-badge">Early Career</div>
+              <div class="exp-role">Programmer Analyst</div>
+              <div class="exp-company">Apple Inc. (via Ex!lant Technologies)</div>
+            </div>
+            <div class="exp-meta">
+              <div class="exp-date">Feb 2011 &mdash; Oct 2014</div>
+              <div class="exp-location">Bengaluru, India</div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Worked on software signing macOS application supporting secure build and update pipelines.</li>
+            <li>Designed UI components and base class structures using sound object-oriented design principles.</li>
+            <li>Translated business requirements into ERS and detailed design documentation.</li>
+            <li>Performed comprehensive unit testing and provided UAT support for stable, production-ready releases.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROJECTS (grey) ─── -->
+  <section id="projects">
+    <div class="section-wrap">
+      <p class="section-eyebrow reveal">Projects</p>
+      <h2 class="section-heading reveal">Things I've built.</h2>
+      <p class="section-sub reveal" style="white-space: nowrap;">Real-world tools built to automate operations, reduce toil, and keep systems running smoothly.</p>
+
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <div class="project-icon-wrap">📊</div>
+          <div class="project-name">Chaos Engineering</div>
+          <div class="project-desc">
+            Built a cloud-native chaos engineering platform on Amazon EKS using Python microservices, Docker, Kubernetes, and AWS infrastructure.
+          </div>
+          <div class="project-tags">
+            <span class="tag">AWS EKS & EC2</span>
+            <span class="tag">Python</span>
+            <span class="tag">Docker</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/vinay-singh-engineer/chaos-engineering" target="_blank" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-icon-wrap">🤖</div>
+          <div class="project-name">AutoPilot</div>
+          <div class="project-desc">
+            Flask-based job orchestration platform with REST APIs to centrally manage and monitor batch workflows. Eliminated third-party dependency — 100% in-house solution.
+          </div>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">REST API</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/vinay-singh-engineer/AutoPilot" target="_blank" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-icon-wrap">🩹</div>
+          <div class="project-name">PatchIT</div>
+          <div class="project-desc">
+            Python and Ansible based automation solution for kernel upgrades and application maintenance tasks, reducing manual workload by 60%.
+          </div>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Ansible</span>
+            <span class="tag">Linux</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/vinay-singh-engineer/PatchIT" target="_blank" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CERTIFICATIONS (white) ─── -->
+  <section id="certifications">
+    <div class="section-wrap">
+      <p class="section-eyebrow reveal">Certifications &amp; Education</p>
+      <h2 class="section-heading reveal">Credentials.</h2>
+      <p class="section-sub reveal" style="white-space: nowrap;">Industry certifications and academic qualifications backing 15+ years of hands-on experience.</p>
+
+      <div class="cert-grid">
+
+        <div class="cert-card reveal">
+          <div class="cert-icon">☁️</div>
+          <div>
+            <div class="cert-name">AWS Certified Cloud Practitioner</div>
+            <div class="cert-issuer">Amazon Web Services &bull; CLF-C02</div>
+          </div>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon">🐍</div>
+          <div>
+            <div class="cert-name">Certified Python Programmer</div>
+            <div class="cert-issuer">PCEP-30-01 &amp; PCAP-31-03</div>
+          </div>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon">🎓</div>
+          <div>
+            <div class="cert-name">Post Graduate Program in Cloud Computing</div>
+            <div class="cert-issuer">University of Texas at Austin</div>
+          </div>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon">🏛️</div>
+          <div>
+            <div class="cert-name">B.Tech in Information Technology</div>
+            <div class="cert-issuer">Jaipur, India &bull; 2006 &ndash; 2010</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT (grey) ─── -->
+  <section id="contact">
+    <div class="section-wrap">
+      <div class="contact-card reveal">
+        <p class="section-eyebrow" style="margin-bottom:1rem;">Get In Touch</p>
+        <h2 class="contact-heading">Let's work together.</h2>
+        <p class="contact-desc">
+          I'm open to new opportunities. Whether you have a great role, a question,
+          or just want to talk reliability engineering — my inbox is open.
+        </p>
+        <div class="contact-buttons">
+          <a href="mailto:vinayjhansi@gmail.com" class="btn btn-filled">Say Hello</a>
+          <a href="https://www.linkedin.com/in/vinay-singh-engineer/" target="_blank" class="btn btn-outline">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 Vinay Singh. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/vinay-singh-engineer" target="_blank">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/vinay-singh-engineer/" target="_blank">LinkedIn</a></li>
+        <li><a href="resume.pdf" target="_blank">Resume</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- ─── Scripts ─── -->
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const html   = document.documentElement;
+
+    const saved = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', saved);
+
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next    = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      toggle.style.transform = 'scale(0.85) rotate(20deg)';
+      setTimeout(() => { toggle.style.transform = ''; }, 200);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
