@@ -351,40 +351,23 @@
     .about-text p strong { color: var(--text); font-weight: 600; }
 
     .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
       margin-top: 2rem;
     }
 
     .skill-chip {
-      background: var(--bg);              /* white card on grey section */
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 0.7rem 1rem;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 0.72rem;
       font-weight: 500;
-      transition: all 0.2s, background 0.4s, border-color 0.4s;
-      box-shadow: var(--shadow-sm);
+      color: var(--accent);
+      background: rgba(0, 113, 227, 0.07);
+      padding: 0.25rem 0.65rem;
+      border-radius: 980px;
+      transition: color 0.4s, background 0.4s;
     }
 
-    .skill-chip:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-1px);
-      color: var(--text);
-    }
-
-    .skill-chip .dot {
-      width: 6px; height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      flex-shrink: 0;
-      transition: background 0.4s;
-    }
+    [data-theme="dark"] .skill-chip { background: rgba(41, 151, 255, 0.1); }
 
     .about-visual { display: flex; justify-content: center; }
 
@@ -949,22 +932,31 @@
             </p>
           </div>
           <div class="skills-grid reveal">
-            <div class="skill-chip"><span class="dot"></span>Python | Java | Swift</div>
-            <div class="skill-chip"><span class="dot"></span>Relation Databases</div>
-            <div class="skill-chip"><span class="dot"></span>Shell Scripting</div>
-            <div class="skill-chip"><span class="dot"></span>AWS</div>
-            <div class="skill-chip"><span class="dot"></span>Docker | Kubernetes</div>
-            <div class="skill-chip"><span class="dot"></span>Terraform | Ansible</div>
-            <div class="skill-chip"><span class="dot"></span>Rio | Jenkins | GitHub CI</div>
-            <div class="skill-chip"><span class="dot"></span>Splunk</div>
-            <div class="skill-chip"><span class="dot"></span>Prometheus | Grafana</div>
-            <div class="skill-chip"><span class="dot"></span>Nginx | Load Balancer</div>
-            <div class="skill-chip"><span class="dot"></span>Linux (RHEL) | macOS</div>
-            <div class="skill-chip"><span class="dot"></span>REST APIs | Microservices</div>
-            <div class="skill-chip"><span class="dot"></span>System Design</div>
-            <div class="skill-chip"><span class="dot"></span>Incident Management</div>
-            <div class="skill-chip"><span class="dot"></span>On-Call</div>
-            <div class="skill-chip"><span class="dot"></span>Disaster Recovery</div>
+            <span class="skill-chip">Python</span>
+            <span class="skill-chip">Java</span>
+            <span class="skill-chip">Swift</span>
+            <span class="skill-chip">Shell Scripting</span>
+            <span class="skill-chip">AWS</span>
+            <span class="skill-chip">Docker</span>
+            <span class="skill-chip">Kubernetes</span>
+            <span class="skill-chip">Terraform</span>
+            <span class="skill-chip">Ansible</span>
+            <span class="skill-chip">Jenkins</span>
+            <span class="skill-chip">GitHub Actions</span>
+            <span class="skill-chip">Prometheus</span>
+            <span class="skill-chip">Grafana</span>
+            <span class="skill-chip">Splunk</span>
+            <span class="skill-chip">Loki</span>
+            <span class="skill-chip">Nginx</span>
+            <span class="skill-chip">Linux (RHEL)</span>
+            <span class="skill-chip">macOS</span>
+            <span class="skill-chip">REST APIs</span>
+            <span class="skill-chip">Microservices</span>
+            <span class="skill-chip">Relational Databases</span>
+            <span class="skill-chip">System Design</span>
+            <span class="skill-chip">Incident Management</span>
+            <span class="skill-chip">Disaster Recovery</span>
+            <span class="skill-chip">On Call</span>
           </div>
         </div>
       </div>
