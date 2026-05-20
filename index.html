@@ -1,3 +1,4 @@
+<!-- Portfolio template by Vinay Singh. Please do not reuse without permission. -->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -957,6 +958,7 @@
             <span class="skill-chip">Incident Management</span>
             <span class="skill-chip">Disaster Recovery</span>
             <span class="skill-chip">On Call</span>
+            <span class="skill-chip">Networking</span>
           </div>
         </div>
       </div>
@@ -985,14 +987,14 @@
             </div>
           </div>
           <ul class="exp-bullets">
+            <li>Architected and deployed a production-grade SRE platform on AWS EKS with Terraform, Docker, Prometheus, and Grafana — covering SLO dashboards and burn rate alerting.</li>
             <li>Reduced MTTR by 60% through automation, monitoring improvements, and process optimization via in-depth root cause analysis.</li>
             <li>Designed Splunk dashboards and alert strategies resulting in a 70% reduction in incoming support tickets by proactively detecting failures.</li>
             <li>Designed and developed AutoPilot — a Flask-based job orchestration platform with REST APIs to centrally manage batch workflows, eliminating third-party dependency (100% in-house).</li>
             <li>Developed PatchIT — a Python and Ansible automation solution reducing manual workload by 60% for kernel upgrade and application maintenance tasks.</li>
             <li>Reduced operational toil by 70% through Python and Shell automation tools, improving developer and support team productivity.</li>
             <li>Architected and maintained CI/CD pipelines using Jenkins enabling reliable, repeatable, scalable deployments across distributed teams.</li>
-            <li>Leveraged GenAI tools including Claude Code to boost personal productivity by 70%.</li>
-            <li>Hands-on experience with firewall rules, port exposure, ingress/egress traffic, and TCP/IP debugging in Linux environments.</li>
+            <li>Incorporated GenAI tools into daily workflows, reducing automation development time by 40%.</li>
           </ul>
         </div>
 
@@ -1010,6 +1012,9 @@
           </div>
           <ul class="exp-bullets">
             <li>Led end-to-end system design, architecture, and production delivery of scalable, highly available enterprise applications.</li>
+            <li>Owned deployment pipelines and infrastructure provisioning for multiple enterprise applications, ensuring reliable and repeatable releases.</li>
+            <li>Led capacity planning — modelled growth, right-sized infrastructure, and prevented capacity-related incidents before they occurred.</li>
+            <li>Designed and executed DR drills including controlled failure injection to validate recovery readiness and confirm RTO/RPO targets.</li>
             <li>Prototyped and implemented AWS S3 integrations using AWS S3 SDK and s3curl for scalable cloud storage solutions.</li>
             <li>Implemented secure communication mechanisms including mTLS prototyping and certificate lifecycle management.</li>
             <li>Built automated GUI test frameworks and REST API sanity suites, improving release confidence and reducing production defects.</li>
@@ -1052,21 +1057,42 @@
       <div class="projects-grid">
 
         <div class="project-card reveal">
-          <div class="project-icon-wrap">📊</div>
+          <div class="project-icon-wrap">🛡️</div>
           <div class="project-name">SRE Platform</div>
           <div class="project-desc">
             Production-grade SRE platform on AWS — EKS-deployed Flask service with Terraform IaC, GitHub Actions CI/CD, Prometheus/Grafana SLO dashboards, multi-window burn rate alerting, and chaos engineering endpoints.
           </div>
           <div class="project-tags">
-            <span class="tag">AWS EKS & EC2</span>
+            <span class="tag">AWS EKS</span>
+            <span class="tag">AWS EC2</span>
             <span class="tag">Terraform</span>
             <span class="tag">Python</span>
             <span class="tag">Docker</span>
             <span class="tag">Grafana</span>
             <span class="tag">Prometheus</span>
+            <span class="tag">CI/CD</span>
           </div>
           <div class="project-footer">
             <a href="https://github.com/vinay-singh-engineer/sre-platform" target="_blank" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-icon-wrap">🔧</div>
+          <div class="project-name">PatchIT</div>
+          <div class="project-desc">
+            Python CLI that orchestrates Ansible to stop application services, apply RHEL kernel patches, reboot, and restore services — with safety guards and health assertion at every step. Works across EC2, on-premises, and bare metal over plain SSH.
+          </div>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Ansible</span>
+            <span class="tag">RHEL</span>
+            <span class="tag">SSH</span>
+            <span class="tag">systemd</span>
+            <span class="tag">CI</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/vinay-singh-engineer/patchit" target="_blank" class="project-link">View on GitHub →</a>
           </div>
         </div>
 
@@ -1082,28 +1108,12 @@
             <span class="tag">REST API</span>
           </div>
           <div class="project-footer">
-            <a href="https://github.com/vinay-singh-engineer/AutoPilot" target="_blank" class="project-link">View on GitHub →</a>
-          </div>
-        </div>
-
-        <div class="project-card reveal">
-          <div class="project-icon-wrap">🩹</div>
-          <div class="project-name">PatchIT</div>
-          <div class="project-desc">
-            Python and Ansible based automation solution for kernel upgrades and application maintenance tasks, reducing manual workload by 60%.
-          </div>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Ansible</span>
-            <span class="tag">Linux</span>
-          </div>
-          <div class="project-footer">
-            <a href="https://github.com/vinay-singh-engineer/PatchIT" target="_blank" class="project-link">View on GitHub →</a>
+            <a href="https://github.com/vinay-singh-engineer/autopilot" target="_blank" class="project-link">View on GitHub →</a>
           </div>
         </div>
         
         <div class="project-card reveal">
-          <div class="project-icon-wrap">🎧</div>
+          <div class="project-icon-wrap">🏗️</div>
           <div class="project-name">IaC Python Web App</div>
           <div class="project-desc">
             Built a Python Flask web application on AWS using Terraform, provisioning custom VPC networking, EC2 infrastructure, security groups, and automated deployment through Infrastructure as Code (IaC).
@@ -1113,9 +1123,23 @@
             <span class="tag">Python</span>
             <span class="tag">Bash</span>
             <span class="tag">AWS</span>
+            <span class="tag">nginx</span>
+            <span class="tag">Gunicorn</span>
+            <span class="tag">CI</span>
           </div>
           <div class="project-footer">
             <a href="https://github.com/vinay-singh-engineer/iac-python-webapp" target="_blank" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="background: var(--bg-secondary); border: 2px dashed rgba(0,0,0,0.18);">
+          <div class="project-icon-wrap" style="font-size: 2rem;">🔒</div>
+          <div class="project-name">+ More at Apple</div>
+          <div class="project-desc">
+            15 years of internal tooling, automation frameworks, and platform engineering — built and owned at Apple, behind the firewall. Covers observability pipelines, incident automation, deployment systems, and large-scale service reliability.
+          </div>
+          <div class="project-footer">
+            <span style="font-size: 0.82rem; color: var(--text-tertiary);">Not publicly available</span>
           </div>
         </div>
 
@@ -1190,11 +1214,13 @@
   <footer>
     <div class="footer-inner">
       <p class="footer-copy">© 2026 Vinay Singh. All rights reserved.</p>
-      <ul class="footer-links">
-        <li><a href="https://github.com/vinay-singh-engineer" target="_blank">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/vinay-singh-engineer/" target="_blank">LinkedIn</a></li>
-        <li><a href="resume.pdf" target="_blank">Resume</a></li>
-      </ul>
+      <div style="display: flex; align-items: center; gap: 1.5rem;">
+        <ul class="footer-links">
+          <li><a href="https://github.com/vinay-singh-engineer" target="_blank">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/vinay-singh-engineer/" target="_blank">LinkedIn</a></li>
+        </ul>
+        <p class="footer-copy">v1.0.0</p>
+      </div>
     </div>
   </footer>
 
