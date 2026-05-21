@@ -14,4 +14,4 @@ Senior Site Reliability Engineer with 15+ years of experience at Apple (via TCS)
 
 ## Contact
 
-[LinkedIn](https://linkedin.com/in/vinay-singh-engineer) · [Email](mailto:vinayjhansi@gmail.com) · [GitHub](https://github.com/vinay-singh-engineer)
+[LinkedIn](https://linkedin.com/in/vinay-singh-engineer) · [Email](mailto:vinayjhansi@gmail.com)
