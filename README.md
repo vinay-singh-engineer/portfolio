@@ -51,6 +51,7 @@ Senior Site Reliability Engineer with 15+ years of experience at Apple (via TCS)
 | [AutoPilot](https://github.com/vinay-singh-engineer/autopilot) | Self-hosted job scheduler with real-time web dashboard and webhook alerting | Flask · APScheduler · SQLite |
 | [Terraform AWS Stack](https://github.com/vinay-singh-engineer/terraform-aws-stack) | Flask web app on AWS provisioned end-to-end with Terraform IaC | Terraform · AWS · EC2 · nginx |
 | [PatchIT](https://github.com/vinay-singh-engineer/patchit) | Python CLI that orchestrates Ansible for automated RHEL kernel patching across EC2 | Python · Ansible · RHEL |
+| [inReach](https://github.com/vinay-singh-engineer/inreach) | A Python tool (CLI/Web) to verify reachability from any source host to any destination:port, with live results as each check completes. | Python · Tailwind CSS |
 
 ---
 
